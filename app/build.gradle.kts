@@ -60,5 +60,6 @@ dependencies {
 
     implementation(libs.androidx.navigation.compose.v285)
     implementation(libs.kotlinx.serialization.json)
+    implementation(libs.androidx.compose.material.icons.extended)
 
 }
