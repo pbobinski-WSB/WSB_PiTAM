@@ -1,4 +1,4 @@
-package com.example.meritomobiledemo
+package com.example.myapplication
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.RoundedCornerShape

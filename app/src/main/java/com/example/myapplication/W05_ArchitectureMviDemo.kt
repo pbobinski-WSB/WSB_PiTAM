@@ -1,4 +1,4 @@
-package pl.merito.mobile.w05
+package com.example.myapplication
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn

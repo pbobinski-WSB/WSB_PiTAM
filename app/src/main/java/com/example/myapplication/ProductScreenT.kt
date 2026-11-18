@@ -4,21 +4,21 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.*
-import androidx.compose.runtime.*
+import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 
 @Composable
-fun ProductScreen(
-    uiState: ProductsUiState,
+fun ProductScreenT(
+    uiState: ProductsUiStateT,
     onRefreshClick: () -> Unit
 ) {
     Scaffold(
         topBar = {
             Text(
-                text = "Katalog Produktów",
+                text = "Katalog Produktów Demo",
                 style = MaterialTheme.typography.titleLarge,
                 modifier = Modifier.padding(16.dp)
             )
@@ -31,18 +31,19 @@ fun ProductScreen(
             contentAlignment = Alignment.Center
         ) {
             when (uiState) {
-                is ProductsUiState.Loading -> {
+                is ProductsUiStateT.Loading -> {
                     CircularProgressIndicator(
                         modifier = Modifier.testTag("loading_indicator")
                     )
                 }
-                is ProductsUiState.Error -> {
+                is ProductsUiStateT.Error -> {
                     Column(horizontalAlignment = Alignment.CenterHorizontally) {
                         Text(
                             text = uiState.message,
                             color = MaterialTheme.colorScheme.error,
                             modifier = Modifier.testTag("error_text")
                         )
+                        Spacer(modifier = Modifier.height(8.dp))
                         Button(
                             onClick = onRefreshClick,
                             modifier = Modifier.testTag("retry_button")
@@ -51,10 +52,14 @@ fun ProductScreen(
                         }
                     }
                 }
-                is ProductsUiState.Success -> {
-                    LazyColumn(modifier = Modifier.fillMaxSize().testTag("product_list")) {
+                is ProductsUiStateT.Success -> {
+                    LazyColumn(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .testTag("product_list")
+                    ) {
                         items(uiState.products, key = { it.id }) { item ->
-                            ProductRow(item)
+                            ProductRowT(item)
                         }
                     }
                 }
@@ -64,7 +69,7 @@ fun ProductScreen(
 }
 
 @Composable
-fun ProductRow(product: Product) {
+fun ProductRowT(product: ProductT) {
     Card(
         modifier = Modifier
             .fillMaxWidth()

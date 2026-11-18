@@ -1,4 +1,4 @@
-package com.example.meritomobiledemo
+package com.example.myapplication
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable

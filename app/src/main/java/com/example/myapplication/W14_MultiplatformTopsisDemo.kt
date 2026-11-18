@@ -1,19 +1,18 @@
-package pl.merito.mobile.w14
+package com.example.myapplication
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Calculate
 import androidx.compose.material.icons.filled.EmojiEvents
 import androidx.compose.material3.*
 import androidx.compose.runtime.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -195,7 +194,7 @@ fun W14_TopsisDemoScreen() {
                         colors = CardDefaults.cardColors(
                             containerColor = if (isWinner) Color(0xFFF1F8E9) else MaterialTheme.colorScheme.surface
                         ),
-                        border = if (isWinner) CardDefaults.outlinedCardBorder().copy(brush = androidx.compose.ui.graphics.SolidColor(Color(0xFF4CAF50))) else CardDefaults.outlinedCardBorder()
+                        border = if (isWinner) CardDefaults.outlinedCardBorder().copy(brush = SolidColor(Color(0xFF4CAF50))) else CardDefaults.outlinedCardBorder()
                     ) {
                         Row(
                             modifier = Modifier.fillMaxWidth().padding(14.dp),

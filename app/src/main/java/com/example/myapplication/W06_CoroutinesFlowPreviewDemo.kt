@@ -1,4 +1,4 @@
-package com.example.meritomobiledemo
+package com.example.myapplication
 
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
@@ -17,7 +17,6 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.*
-import kotlinx.coroutines.flow.*
 
 // ============================================================================
 // 1. GŁÓWNY INTERAKTYWNY EKRAN WYKŁADOWY (W06)

@@ -7,9 +7,11 @@ import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
 
-@RunWith(RobolectricTestRunner::class) // Dzięki temu test UI odpala się na JVM w 2 sekundy!
-class ProductScreenUiTest {
+@RunWith(RobolectricTestRunner::class)
+@Config(sdk = [35])
+class ProductScreenUiTestT {
 
     @get:Rule
     val composeRule = createComposeRule()
@@ -17,31 +19,27 @@ class ProductScreenUiTest {
     @Test
     fun shouldShowLoadingIndicatorWhenStateIsLoading() {
         composeRule.setContent {
-            ProductScreen(
-                uiState = ProductsUiState.Loading,
+            ProductScreenT(
+                uiState = ProductsUiStateT.Loading,
                 onRefreshClick = {}
             )
         }
 
-        // Asercja: szukamy komponentu po testTagu
         composeRule.onNodeWithTag("loading_indicator").assertIsDisplayed()
     }
 
     @Test
-    fun shouldRenderListAndTriggerRefreshButtonWhenError() {
+    fun shouldRenderErrorAndHandleRetryClick() {
         var refreshClicked = false
 
         composeRule.setContent {
-            ProductScreen(
-                uiState = ProductsUiState.Error("Awaria serwera"),
+            ProductScreenT(
+                uiState = ProductsUiStateT.Error("Błąd serwera"),
                 onRefreshClick = { refreshClicked = true }
             )
         }
 
-        // Asercja obecności tekstu błędu
-        composeRule.onNodeWithText("Awaria serwera").assertIsDisplayed()
-
-        // Kliknięcie w przycisk
+        composeRule.onNodeWithText("Błąd serwera").assertIsDisplayed()
         composeRule.onNodeWithTag("retry_button").performClick()
         assertTrue("Callback odświeżania powinien zostać wywołany", refreshClicked)
     }
@@ -49,18 +47,17 @@ class ProductScreenUiTest {
     @Test
     fun shouldDisplayProductsInListWhenSuccess() {
         val testProducts = listOf(
-            Product("1", "Monitor 4K", 1499.0),
-            Product("2", "Podkładka pod mysz", 49.0)
+            ProductT("1", "Monitor 4K", 1499.0),
+            ProductT("2", "Podkładka pod mysz", 49.0)
         )
 
         composeRule.setContent {
-            ProductScreen(
-                uiState = ProductsUiState.Success(testProducts),
+            ProductScreenT(
+                uiState = ProductsUiStateT.Success(testProducts),
                 onRefreshClick = {}
             )
         }
 
-        // Weryfikacja węzłów semantycznych z tekstem
         composeRule.onNodeWithText("Monitor 4K").assertIsDisplayed()
         composeRule.onNodeWithText("1499.0 PLN").assertIsDisplayed()
         composeRule.onNodeWithText("Podkładka pod mysz").assertIsDisplayed()
